@@ -65,7 +65,7 @@ export default function Services() {
           <p className="text-white/40 max-w-xl mx-auto">{t('services_sub')}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
           {services.map((service, i) => <ServiceCard key={service.titleEn} service={service} index={i} />)}
         </div>
 

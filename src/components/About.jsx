@@ -54,8 +54,8 @@ export default function About() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 40 }} animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }} className="relative">
-            <div className="glass rounded-2xl p-8 gradient-border glow relative overflow-hidden">
+            transition={{ duration: 0.7, delay: 0.15 }} className="relative mt-8 md:mt-0">
+            <div className="glass rounded-2xl p-6 md:p-8 gradient-border glow relative overflow-hidden">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold"
                   style={{ background: 'linear-gradient(135deg, #f59e0b, #6c63ff)' }}>RP</div>
@@ -76,7 +76,7 @@ export default function About() {
                 style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)' }} />
             </div>
             <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-6 -left-6 glass rounded-xl px-4 py-3 border border-white/10 text-sm">
+              className="hidden sm:block absolute -bottom-6 -left-6 glass rounded-xl px-4 py-3 border border-white/10 text-sm">
               <div className="text-white/40 text-xs mb-1">{t('about_building')}</div>
               <div className="font-medium">{t('about_building_what')}</div>
             </motion.div>

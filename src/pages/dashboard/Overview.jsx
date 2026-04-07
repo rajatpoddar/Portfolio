@@ -384,8 +384,7 @@ export default function Overview() {
         <div className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-3">
           💰 Paisa — Aaj Ki Sthiti
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <MoneyCard
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">          <MoneyCard
             icon="✅" label="Is Mahine Aaya" color="#10b981"
             value={fmt(data.thisMonthRev)}
             sub={lastMonthRev => `Pichhle mahine: ${fmt(data.lastMonthRev)}`}

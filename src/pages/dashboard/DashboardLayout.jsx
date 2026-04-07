@@ -135,10 +135,34 @@ export default function DashboardLayout() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-5 md:p-7">
+        <main className="flex-1 p-4 md:p-7 pb-20 md:pb-7">
           <Outlet />
         </main>
       </div>
+
+      {/* Mobile bottom nav */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-30 glass border-t border-white/5 flex items-center justify-around px-2 py-2">
+        {NAV.slice(0, 5).map(({ to, icon, label, end }) => (
+          <NavLink
+            key={to}
+            to={to}
+            end={end}
+            className={({ isActive }) =>
+              `flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-xl transition-all ${
+                isActive ? 'text-white' : 'text-white/30'
+              }`
+            }
+          >
+            {({ isActive }) => (
+              <>
+                <span className={`text-lg transition-transform ${isActive ? 'scale-110' : ''}`}>{icon}</span>
+                <span className="text-[10px] font-medium">{label}</span>
+                {isActive && <span className="w-1 h-1 rounded-full bg-[#6c63ff]" />}
+              </>
+            )}
+          </NavLink>
+        ))}
+      </nav>
     </div>
   );
 }

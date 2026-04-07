@@ -42,7 +42,7 @@ export default function Contact() {
           <p className="text-white/40 max-w-xl mx-auto">{t('contact_sub')}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-[1fr_360px] gap-8">
+        <div className="grid lg:grid-cols-[1fr_360px] gap-8">
           {/* Form */}
           <motion.div initial={{ opacity: 0, x: -30 }} animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}>

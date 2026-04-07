@@ -27,7 +27,7 @@ export default function WhoCanUse() {
           <p className="text-white/40 max-w-xl mx-auto">{t('who_sub')}</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
           {businessTypes.map((biz, i) => (
             <motion.div key={biz.label}
               initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +45,7 @@ export default function WhoCanUse() {
         {/* Trust strip */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 glass rounded-2xl p-6 border border-white/5 flex flex-wrap gap-6 justify-center items-center">
+          className="mt-10 glass rounded-2xl p-5 border border-white/5 grid grid-cols-2 md:flex md:flex-wrap gap-4 md:gap-6 justify-center items-center">
           {[
             { icon: '✅', text: 'Technical knowledge ki zaroorat nahi' },
             { icon: '⚡', text: '500+ ghante ka kaam bachaya' },

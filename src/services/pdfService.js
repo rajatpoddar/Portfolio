@@ -214,12 +214,13 @@ export function exportQuotationPDF(quote, client, maintenancePlans, featurePrice
   y = sectionLabel(doc, 'Pricing Summary', y);
 
   const total = quote.total_amount || 0;
-  const base = quote.base_amount || 0;
-  const featTotal = quote.features_amount || 0;
+  // Compute breakdown from featurePrices (passed in) so numbers always match
+  const featuresTotal = features.reduce((s, f) => s + (featurePrices[f] || 0), 0);
+  const basePrice = Math.max(0, total - featuresTotal);
 
   const summaryRows = [
-    [`Base Project (${quote.project_type})`, base > 0 ? rs(base) : 'Included'],
-    [`Features (${features.length} items)`, featTotal > 0 ? rs(featTotal) : 'Included'],
+    [`Base Project (${quote.project_type})`, rs(basePrice)],
+    [`Features (${features.length} items)`, rs(featuresTotal)],
   ];
 
   if (quote.maintenance && maintenancePlans?.[quote.maintenance]) {

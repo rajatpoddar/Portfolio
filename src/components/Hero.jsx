@@ -62,7 +62,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.h1 variants={itemVariants}
-            className="text-5xl md:text-7xl font-black leading-[1.08] tracking-tight">
+            className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.08] tracking-tight px-2">
             <span className="gradient-text">{headline[0]}</span>
             {headline[1] && <><br /><span className="text-white/90">{headline[1]}</span></>}
           </motion.h1>
@@ -97,7 +97,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={itemVariants}
-            className="flex flex-wrap gap-8 justify-center mt-6 pt-8 border-t border-white/5">
+            className="grid grid-cols-2 sm:flex sm:flex-wrap gap-6 sm:gap-8 justify-center mt-6 pt-8 border-t border-white/5 w-full">
             {[
               { value: '20+', key: 'hero_stat_projects' },
               { value: '1000+', key: 'hero_stat_hours' },

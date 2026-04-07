@@ -28,7 +28,7 @@ export default function Process() {
 
         <div className="relative">
           <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
             {process.map((step, i) => (
               <motion.div key={step.step}
                 initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}

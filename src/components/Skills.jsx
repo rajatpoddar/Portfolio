@@ -67,23 +67,23 @@ export default function Skills() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-[280px_1fr] gap-8">
-          {/* Category tabs */}
+        <div className="grid md:grid-cols-[240px_1fr] gap-6">
+          {/* Category tabs — horizontal scroll on mobile, vertical on desktop */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex md:flex-col gap-3"
+            className="flex md:flex-col gap-2 overflow-x-auto pb-1 md:pb-0 md:overflow-visible"
           >
             {categories.map((cat) => (
               <motion.button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                whileHover={{ x: 4 }}
-                className={`flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-medium transition-all duration-200 text-left cursor-pointer ${
+                whileHover={{ x: 0 }}
+                className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 text-left cursor-pointer shrink-0 md:shrink ${
                   activeCategory === cat
                     ? 'glass border border-white/10 text-white'
-                    : 'text-white/40 hover:text-white/70'
+                    : 'text-white/40 hover:text-white/70 bg-white/[0.02]'
                 }`}
               >
                 <div
@@ -104,7 +104,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="glass rounded-2xl p-8 border border-white/5"
+            className="glass rounded-2xl p-6 border border-white/5"
           >
             <div className="flex items-center gap-3 mb-8">
               <div

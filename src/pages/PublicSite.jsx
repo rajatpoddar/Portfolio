@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 
 export default function PublicSite() {
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg)', color: 'var(--text)' }}>
+    <div className="min-h-screen bg-[#050508] text-white">
       <Navbar />
       <Hero />
       <About />

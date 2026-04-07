@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { leadsDb, clientsDb } from '../../lib/db';
 import ResponsiveTable from '../../components/ui/ResponsiveTable';
@@ -39,10 +39,10 @@ export default function Leads() {
   );
 
   const columns = [
-    { key: 'name',    label: 'Name' },
-    { key: 'company', label: 'Company' },
-    { key: 'status',  label: 'Status' },
-    { key: 'date',    label: 'Date' },
+    { key: 'name',     label: 'Name' },
+    { key: 'company',  label: 'Company' },
+    { key: 'status',   label: 'Status' },
+    { key: 'date',     label: 'Date' },
     { key: '_actions', label: '', actionsCol: true },
   ];
 
@@ -51,20 +51,20 @@ export default function Leads() {
     const statusColor = STATUS_COLORS[status] || '#6b6b80';
     if (key === 'name') return (
       <div>
-        <div className="font-medium text-sm" style={{ color: 'var(--text)' }}>{lead.name}</div>
-        <div className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>{lead.email}</div>
+        <div className="font-medium text-sm text-white/80">{lead.name}</div>
+        <div className="text-xs text-white/35 mt-0.5">{lead.email}</div>
       </div>
     );
-    if (key === 'company') return <span style={{ color: 'var(--text-mid)' }}>{lead.company || '—'}</span>;
+    if (key === 'company') return <span className="text-sm text-white/50">{lead.company || '—'}</span>;
     if (key === 'status') return (
       <select value={status} onChange={(e) => handleStatusChange(lead.id, e.target.value)}
-        className="text-xs px-2.5 py-1 rounded-full font-medium capitalize cursor-pointer border-0 outline-none min-h-0"
+        className="text-xs px-2.5 py-1 rounded-full font-medium capitalize cursor-pointer border-0 outline-none"
         style={{ background: `${statusColor}18`, color: statusColor, minHeight: 'unset' }}>
         {Object.keys(STATUS_COLORS).map((s) => <option key={s} value={s}>{s}</option>)}
       </select>
     );
     if (key === 'date') return (
-      <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+      <span className="text-xs text-white/35">
         {new Date(lead.created_at).toLocaleDateString('en-IN')}
       </span>
     );
@@ -77,18 +77,19 @@ export default function Leads() {
       <>
         {lead.email && (
           <a href={`mailto:${lead.email}`}
-            className="btn-icon w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-colors"
-            style={{ background: 'rgba(108,99,255,0.1)', color: '#6c63ff' }}>📧</a>
+            className="btn-icon w-8 h-8 rounded-lg bg-[#6c63ff]/10 hover:bg-[#6c63ff]/20 flex items-center justify-center text-[#6c63ff] text-xs transition-colors">
+            📧
+          </a>
         )}
         {lead.phone && (
           <a href={`https://wa.me/${lead.phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer"
-            className="btn-icon w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-colors"
-            style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981' }}>💬</a>
+            className="btn-icon w-8 h-8 rounded-lg bg-green-500/10 hover:bg-green-500/20 flex items-center justify-center text-green-400 text-xs transition-colors">
+            💬
+          </a>
         )}
         {status !== 'converted' && (
           <button onClick={() => handleConvert(lead)}
-            className="px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer"
-            style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', minHeight: 'unset' }}>
+            className="btn-icon px-2.5 py-1 rounded-lg bg-[#10b981]/10 hover:bg-[#10b981]/20 text-[#10b981] text-xs font-medium transition-colors cursor-pointer">
             → Client
           </button>
         )}
@@ -98,38 +99,32 @@ export default function Leads() {
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-xl font-bold" style={{ color: 'var(--text)' }}>Leads</h1>
-          <p className="text-sm mt-0.5" style={{ color: 'var(--text-muted)' }}>{leads.length} from portfolio</p>
+          <h1 className="text-2xl font-bold">Leads</h1>
+          <p className="text-sm text-white/30 mt-0.5">{leads.length} from portfolio</p>
         </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs"
-          style={{ background: 'rgba(16,185,129,0.1)', borderColor: 'rgba(16,185,129,0.2)', color: '#10b981' }}>
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
           Auto-captured
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {Object.entries(STATUS_COLORS).map(([status, color]) => (
-          <div key={status} className="rounded-xl p-4 border" style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
+          <div key={status} className="glass rounded-xl p-4 border border-white/5">
             <div className="text-lg font-black" style={{ color }}>
               {leads.filter((l) => (l.status || 'new') === status).length}
             </div>
-            <div className="text-xs mt-0.5 capitalize" style={{ color: 'var(--text-muted)' }}>{status}</div>
+            <div className="text-xs text-white/35 mt-0.5 capitalize">{status}</div>
           </div>
         ))}
       </div>
 
-      {/* Search */}
       <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search leads..."
-        className="w-full max-w-sm rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-colors"
-        style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--text)' }} />
+        className="w-full max-w-sm bg-white/[0.04] border border-white/8 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#6c63ff]/50 transition-colors" />
 
-      {/* Table */}
-      <div className="rounded-2xl border overflow-hidden" style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
+      <div className="glass rounded-2xl border border-white/5 overflow-hidden">
         <ResponsiveTable
           columns={columns}
           rows={filtered}

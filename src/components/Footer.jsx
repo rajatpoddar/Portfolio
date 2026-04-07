@@ -22,7 +22,7 @@ export default function Footer() {
           </a>
           <a href="mailto:solutionspoddar@gmail.com"
             className="text-xs text-white/30 hover:text-white transition-colors">Email</a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+          <a href="https://github.com/rajatpoddar" target="_blank" rel="noopener noreferrer"
             className="text-xs text-white/30 hover:text-white transition-colors">GitHub</a>
         </div>
       </div>

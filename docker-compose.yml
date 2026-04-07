@@ -11,7 +11,7 @@ services:
     image: rajat-portfolio:latest
     container_name: rajat-portfolio
     ports:
-      - "61873:80"
+      - "6187:80"
     restart: unless-stopped
     environment:
       - NODE_ENV=production

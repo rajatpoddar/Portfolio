@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { LangProvider } from './i18n/LangContext';
 import { ToastProvider } from './components/ui/Toast';
+import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Public pages
@@ -19,10 +20,11 @@ import PricingSettings from './pages/dashboard/PricingSettings';
 
 export default function App() {
   return (
-    <LangProvider>
-      <ToastProvider>
-        <AuthProvider>
-          <BrowserRouter>
+    <ThemeProvider>
+      <LangProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <BrowserRouter>
             <Routes>
               {/* Public */}
               <Route path="/" element={<PublicSite />} />
@@ -52,5 +54,6 @@ export default function App() {
         </AuthProvider>
       </ToastProvider>
     </LangProvider>
+  </ThemeProvider>
   );
 }

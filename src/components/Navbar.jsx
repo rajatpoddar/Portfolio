@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '../i18n/LangContext';
+import { useTheme } from '../context/ThemeContext';
 
 const NAV_LINKS = [
   { key: 'nav_about',    id: 'about'    },
@@ -15,6 +16,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, t, toggle } = useLang();
+  const { theme, toggle: toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -53,6 +55,13 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
+          {/* Theme toggle */}
+          <motion.button onClick={toggleTheme} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+            className="btn-icon w-9 h-9 flex items-center justify-center rounded-full glass border border-white/10 hover:border-white/20 text-sm transition-all cursor-pointer"
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </motion.button>
+          {/* Lang toggle */}
           <motion.button onClick={toggle} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full glass border border-white/10 hover:border-white/20 text-xs font-medium text-white/60 hover:text-white transition-all cursor-pointer">
             <span>{lang === 'en' ? '🇮🇳' : '🇬🇧'}</span>

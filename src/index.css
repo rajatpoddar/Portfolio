@@ -1,17 +1,45 @@
 @import "tailwindcss";
 
+/* ─── Theme variables ─────────────────────────────────────────────────────── */
 @layer base {
   :root {
-    --color-bg: #050508;
-    --color-surface: #0d0d14;
-    --color-border: rgba(255,255,255,0.07);
-    --color-accent: #6c63ff;
-    --color-accent2: #00d4ff;
-    --color-text: #e8e8f0;
-    --color-muted: #6b6b80;
+    /* Dark theme (default) */
+    --bg:          #050508;
+    --bg-surface:  #0d0d14;
+    --bg-card:     #0d0d14;
+    --bg-hover:    rgba(255,255,255,0.03);
+    --border:      rgba(255,255,255,0.07);
+    --border-mid:  rgba(255,255,255,0.10);
+    --text:        #e8e8f0;
+    --text-mid:    rgba(232,232,240,0.60);
+    --text-muted:  rgba(232,232,240,0.35);
+    --accent:      #6c63ff;
+    --accent2:     #00d4ff;
+    --glass-bg:    rgba(255,255,255,0.04);
+    --glass-blur:  blur(20px);
+    --shadow:      0 4px 24px rgba(0,0,0,0.4);
   }
 
-  * {
+  /* Light theme */
+  [data-theme="light"] {
+    --bg:          #f5f5f8;
+    --bg-surface:  #ffffff;
+    --bg-card:     #ffffff;
+    --bg-hover:    rgba(0,0,0,0.03);
+    --border:      rgba(0,0,0,0.08);
+    --border-mid:  rgba(0,0,0,0.12);
+    --text:        #0f0f1e;
+    --text-mid:    rgba(15,15,30,0.60);
+    --text-muted:  rgba(15,15,30,0.40);
+    --accent:      #6c63ff;
+    --accent2:     #0099cc;
+    --glass-bg:    rgba(255,255,255,0.80);
+    --glass-blur:  blur(20px);
+    --shadow:      0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  /* ── Reset & base ─────────────────────────────────────────────────────── */
+  *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -19,14 +47,26 @@
 
   html {
     scroll-behavior: smooth;
+    /* Prevent horizontal overflow at root */
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    background-color: var(--bg);
+    color: var(--text);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    max-width: 100vw;
+    /* Prevent iOS bounce causing horizontal scroll */
+    position: relative;
+  }
+
+  /* Prevent any child from causing horizontal overflow */
+  #root {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   ::selection {
@@ -34,42 +74,52 @@
     color: #fff;
   }
 
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--color-bg);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-accent);
-    border-radius: 2px;
-  }
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
 
-  /* ── Dark theme for ALL native selects ─────────────────────────────────── */
+  /* ── Dark selects ─────────────────────────────────────────────────────── */
   select {
-    background-color: rgba(255, 255, 255, 0.04) !important;
-    color: #e8e8f0 !important;
-    border-color: rgba(255, 255, 255, 0.08) !important;
+    background-color: var(--bg-surface) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
     color-scheme: dark;
   }
-
+  [data-theme="light"] select {
+    color-scheme: light;
+  }
   select option {
-    background-color: #0d0d14 !important;
-    color: #e8e8f0 !important;
+    background-color: var(--bg-surface) !important;
+    color: var(--text) !important;
   }
+  input[type="date"] { color-scheme: dark; }
+  [data-theme="light"] input[type="date"] { color-scheme: light; }
 
-  /* Date input dark fix */
-  input[type="date"] {
-    color-scheme: dark;
+  /* ── Touch targets ────────────────────────────────────────────────────── */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* Override for icon-only small buttons */
+  .btn-icon {
+    min-height: 28px !important;
+    min-width: 28px !important;
   }
 }
 
+/* ─── Utilities ───────────────────────────────────────────────────────────── */
 @layer utilities {
   .glass {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border);
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
   }
 
   .gradient-text {
@@ -82,7 +132,6 @@
   .gradient-border {
     position: relative;
   }
-
   .gradient-border::before {
     content: '';
     position: absolute;
@@ -99,21 +148,43 @@
   .glow {
     box-shadow: 0 0 40px rgba(108, 99, 255, 0.15), 0 0 80px rgba(0, 212, 255, 0.05);
   }
+  .glow-sm { box-shadow: 0 0 20px rgba(108, 99, 255, 0.2); }
 
-  .glow-sm {
-    box-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+  /* Responsive table → card list on mobile */
+  .table-to-cards thead { display: none; }
+  .table-to-cards tbody tr {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    gap: 4px;
+  }
+  .table-to-cards tbody tr:last-child { border-bottom: none; }
+  .table-to-cards td {
+    display: flex;
+    align-items: center;
+    padding: 2px 0;
+    border: none !important;
+  }
+  .table-to-cards td[data-label]::before {
+    content: attr(data-label);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    min-width: 80px;
+    font-weight: 600;
   }
 
-  .noise {
-    position: relative;
+  /* Horizontal scroll container for filter pills */
+  .scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .scroll-x::-webkit-scrollbar { display: none; }
 
-  .noise::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    opacity: 0.4;
-  }
+  /* Safe area padding for bottom nav */
+  .pb-safe { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  .mb-safe { margin-bottom: max(80px, calc(64px + env(safe-area-inset-bottom))); }
 }

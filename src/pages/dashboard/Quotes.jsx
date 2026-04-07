@@ -8,6 +8,7 @@ import { fetchPricing, calculateTotalDynamic } from '../../services/pricingServi
 import { exportQuotationPDF } from '../../services/pdfService';
 import FeatureSelector from '../../components/tools/FeatureSelector';
 import { useToast } from '../../components/ui/Toast';
+import ResponsiveTable from '../../components/ui/ResponsiveTable';
 
 const STATUS_COLORS = {
   draft: '#6b6b80', sent: '#00d4ff', accepted: '#10b981', rejected: '#ef4444',
@@ -397,20 +398,18 @@ export default function Quotes() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-3">
-        <input
-          value={search} onChange={(e) => setSearch(e.target.value)}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input value={search} onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by client, project type..."
-          className="bg-white/[0.04] border border-white/8 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#6c63ff]/50 transition-colors flex-1 min-w-[200px]"
-        />
-        <div className="flex gap-2">
+          className="flex-1 rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-colors"
+          style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--text)' }} />
+        <div className="scroll-x flex gap-2 pb-0.5">
           {['all', ...Object.keys(STATUS_COLORS)].map((s) => (
-            <button
-              key={s} onClick={() => setStatusFilter(s)}
-              className={`px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer capitalize ${
-                statusFilter === s ? 'bg-[#6c63ff]/20 border border-[#6c63ff]/40 text-white' : 'bg-white/[0.03] border border-white/8 text-white/40 hover:text-white/70'
-              }`}
-            >
+            <button key={s} onClick={() => setStatusFilter(s)}
+              className="shrink-0 px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer capitalize"
+              style={statusFilter === s
+                ? { background: 'rgba(108,99,255,0.2)', border: '1px solid rgba(108,99,255,0.4)', color: 'var(--text)' }
+                : { background: 'var(--bg-hover)', border: '1px solid var(--border)', color: 'var(--text-muted)' }}>
               {s}
             </button>
           ))}
@@ -418,84 +417,68 @@ export default function Quotes() {
       </div>
 
       {/* Table */}
-      <div className="glass rounded-2xl border border-white/5 overflow-hidden">
-        {loading ? (
-          <div className="flex items-center justify-center h-40">
-            <div className="w-5 h-5 border-2 border-[#6c63ff]/30 border-t-[#6c63ff] rounded-full animate-spin" />
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="text-center py-16 text-white/25 text-sm">
-            {search || statusFilter !== 'all' ? 'No quotations match your filters' : 'No quotations yet. Create your first one.'}
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-white/5 text-xs text-white/30 uppercase tracking-wider">
-                  <th className="text-left px-5 py-3 font-medium">#</th>
-                  <th className="text-left px-5 py-3 font-medium">Client</th>
-                  <th className="text-left px-5 py-3 font-medium hidden md:table-cell">Project Type</th>
-                  <th className="text-left px-5 py-3 font-medium">Amount</th>
-                  <th className="text-left px-5 py-3 font-medium">Status</th>
-                  <th className="text-left px-5 py-3 font-medium hidden lg:table-cell">Date</th>
-                  <th className="px-5 py-3" />
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((q, i) => {
-                  const client = clients.find((c) => c.id === q.client_id);
-                  const statusColor = STATUS_COLORS[q.status] || '#6b6b80';
-                  return (
-                    <motion.tr
-                      key={q.id}
-                      initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.03 }}
-                      className="border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors"
-                    >
-                      <td className="px-5 py-3.5 font-mono text-xs text-white/40">{q.quote_number}</td>
-                      <td className="px-5 py-3.5">
-                        <div className="font-medium text-white/80">{client?.name || '—'}</div>
-                        <div className="text-xs text-white/30">{client?.business || ''}</div>
-                      </td>
-                      <td className="px-5 py-3.5 text-white/50 hidden md:table-cell">{q.project_type}</td>
-                      <td className="px-5 py-3.5 font-bold text-white/80">
-                        ₹{(q.total_amount || 0).toLocaleString('en-IN')}
-                      </td>
-                      <td className="px-5 py-3.5">
-                        <span className="text-xs px-2.5 py-1 rounded-full font-medium capitalize"
-                          style={{ background: `${statusColor}18`, color: statusColor }}>
-                          {q.status}
-                        </span>
-                      </td>
-                      <td className="px-5 py-3.5 text-white/30 text-xs hidden lg:table-cell">
-                        {new Date(q.created_at).toLocaleDateString('en-IN')}
-                      </td>
-                      <td className="px-5 py-3.5">
-                        <div className="flex items-center gap-1.5 justify-end">
-                          <button onClick={() => setPreview(q)}
-                            className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white text-xs transition-colors cursor-pointer" title="Preview">
-                            👁
-                          </button>
-                          <button onClick={() => setModal(q)}
-                            className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white text-xs transition-colors cursor-pointer" title="Edit">
-                            ✏️
-                          </button>
-                          <button onClick={() => handleDuplicate(q.id)}
-                            className="w-7 h-7 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white text-xs transition-colors cursor-pointer" title="Duplicate">
-                            📋
-                          </button>
-                          <button onClick={() => handleDelete(q.id)}
-                            className="w-7 h-7 rounded-lg bg-red-500/5 hover:bg-red-500/15 flex items-center justify-center text-red-400/50 hover:text-red-400 text-xs transition-colors cursor-pointer" title="Delete">
-                            🗑
-                          </button>
-                        </div>
-                      </td>
-                    </motion.tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
+      <div className="rounded-2xl border overflow-hidden" style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}>
+        {(() => {
+          const columns = [
+            { key: 'num',     label: '#' },
+            { key: 'client',  label: 'Client' },
+            { key: 'type',    label: 'Project Type' },
+            { key: 'amount',  label: 'Amount' },
+            { key: 'status',  label: 'Status' },
+            { key: 'date',    label: 'Date' },
+            { key: '_actions', label: '', actionsCol: true },
+          ];
+
+          const renderCell = (q, key) => {
+            const client = clients.find((c) => c.id === q.client_id);
+            const statusColor = STATUS_COLORS[q.status] || '#6b6b80';
+            if (key === 'num') return <span className="font-mono text-xs" style={{ color: 'var(--text-muted)' }}>{q.quote_number}</span>;
+            if (key === 'client') return (
+              <div>
+                <div className="font-medium text-sm" style={{ color: 'var(--text)' }}>{client?.name || '—'}</div>
+                <div className="text-xs" style={{ color: 'var(--text-muted)' }}>{client?.business || ''}</div>
+              </div>
+            );
+            if (key === 'type') return <span className="text-sm" style={{ color: 'var(--text-mid)' }}>{q.project_type}</span>;
+            if (key === 'amount') return <span className="font-bold text-sm" style={{ color: 'var(--text)' }}>₹{(q.total_amount || 0).toLocaleString('en-IN')}</span>;
+            if (key === 'status') return (
+              <span className="text-xs px-2.5 py-1 rounded-full font-medium capitalize"
+                style={{ background: `${statusColor}18`, color: statusColor }}>
+                {q.status}
+              </span>
+            );
+            if (key === 'date') return <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{new Date(q.created_at).toLocaleDateString('en-IN')}</span>;
+            return null;
+          };
+
+          const renderActions = (q) => (
+            <>
+              <button onClick={() => setPreview(q)}
+                className="btn-icon w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-colors cursor-pointer"
+                style={{ background: 'var(--bg-hover)', color: 'var(--text-muted)' }}>👁</button>
+              <button onClick={() => setModal(q)}
+                className="btn-icon w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-colors cursor-pointer"
+                style={{ background: 'var(--bg-hover)', color: 'var(--text-muted)' }}>✏️</button>
+              <button onClick={() => handleDuplicate(q.id)}
+                className="btn-icon w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-colors cursor-pointer"
+                style={{ background: 'var(--bg-hover)', color: 'var(--text-muted)' }}>📋</button>
+              <button onClick={() => handleDelete(q.id)}
+                className="btn-icon w-8 h-8 rounded-lg flex items-center justify-center text-xs transition-colors cursor-pointer"
+                style={{ background: 'rgba(239,68,68,0.05)', color: 'rgba(239,68,68,0.6)' }}>🗑</button>
+            </>
+          );
+
+          return (
+            <ResponsiveTable
+              columns={columns}
+              rows={filtered}
+              renderCell={renderCell}
+              renderActions={renderActions}
+              loading={loading}
+              emptyText={search || statusFilter !== 'all' ? 'No quotations match your filters' : 'No quotations yet. Create your first one.'}
+            />
+          );
+        })()}
       </div>
 
       <AnimatePresence>

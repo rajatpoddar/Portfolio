@@ -287,7 +287,7 @@ function QuoteModal({ quote, clients, onSave, onClose }) {
 }
 
 // ─── PREVIEW MODAL ────────────────────────────────────────────────────────────
-function PreviewModal({ quote, clients, onClose }) {
+function PreviewModal({ quote, clients, featurePrices, onClose }) {
   const client = clients.find((c) => c.id === quote.client_id) || {};
   const waText = encodeURIComponent(
     `Hi ${client.name || 'there'}, please find your quotation #${quote.quote_number} attached.\n\nProject: ${quote.project_type}\nTotal: ₹${(quote.total_amount || 0).toLocaleString('en-IN')}\n\nValid for 15 days. Let me know if you have any questions!`
@@ -317,7 +317,7 @@ function PreviewModal({ quote, clients, onClose }) {
               </a>
             )}
             <button
-              onClick={() => exportQuotationPDF(quote, client, MAINTENANCE_PLANS)}
+              onClick={() => exportQuotationPDF(quote, client, MAINTENANCE_PLANS, featurePrices)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#6c63ff]/15 border border-[#6c63ff]/25 text-[#6c63ff] text-xs font-medium hover:bg-[#6c63ff]/25 transition-colors cursor-pointer"
             >
               ⬇ Export PDF
@@ -342,8 +342,9 @@ export default function Quotes() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [modal, setModal] = useState(null);     // null | 'new' | quote object
-  const [preview, setPreview] = useState(null); // null | quote object
+  const [modal, setModal] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [featurePrices, setFeaturePrices] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
 
   const load = async () => {
@@ -356,6 +357,7 @@ export default function Quotes() {
 
   useEffect(() => {
     load();
+    fetchPricing().then(setFeaturePrices);
     if (searchParams.get('new')) { setModal('new'); setSearchParams({}); }
   }, []);
 
@@ -509,6 +511,7 @@ export default function Quotes() {
           <PreviewModal
             quote={preview}
             clients={clients}
+            featurePrices={featurePrices}
             onClose={() => setPreview(null)}
           />
         )}

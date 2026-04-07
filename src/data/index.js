@@ -1,0 +1,218 @@
+// All content is in Hinglish by default — this is the primary language for the site.
+// English toggle is available via the language switcher.
+
+export const services = [
+  {
+    icon: "🤖",
+    title: "AI Business System",
+    titleEn: "AI Application Development",
+    problem: "Aapka business manual kaam mein doob raha hai — time waste, galtiyan, aur slow growth.",
+    solution: "Custom AI system jo aapke kaam ko samjhe, seekhe, aur automatically kare — bilkul aapke business ke hisaab se.",
+    outcome: "60–80% kaam khud ho jaata hai. Aap sirf results dekho.",
+    problemEn: "Your business drowns in repetitive tasks and manual decisions that slow growth.",
+    solutionEn: "Custom AI applications that think, learn, and act — built specifically around your workflows.",
+    outcomeEn: "Cut operational overhead by 60–80% while making smarter, faster decisions at scale.",
+    color: "#6c63ff",
+  },
+  {
+    icon: "⚙️",
+    title: "Business Automation",
+    titleEn: "Business Automation Systems",
+    problem: "Alag-alag tools, manual data entry, aur toot-phooti processes — roz time aur paisa dono jaata hai.",
+    solution: "End-to-end automation jo aapke saare tools ko connect kare, manual kaam hataye, aur 24/7 chale.",
+    outcome: "Har hafte 20+ ghante bachte hain. Human error khatam.",
+    problemEn: "Disconnected tools, manual data entry, and broken processes cost you time and money every day.",
+    solutionEn: "End-to-end automation systems that connect your tools, eliminate manual work, and run 24/7.",
+    outcomeEn: "Save 20+ hours per week and eliminate human error from your core operations.",
+    color: "#00d4ff",
+  },
+  {
+    icon: "📱",
+    title: "Custom App Banao",
+    titleEn: "Custom Web & Mobile Apps",
+    problem: "Ready-made software aapke business ke liye fit nahi — aap unke features ke liye paisa dete ho jo use hi nahi karte.",
+    solution: "Aapke exact business logic ke hisaab se web ya mobile app — sirf wahi jo chahiye.",
+    outcome: "Customers ko pasand aata hai, aur business ke saath scale karta hai.",
+    problemEn: "Off-the-shelf software doesn't fit your business model — you're paying for features you don't need.",
+    solutionEn: "Tailor-built web and mobile applications designed around your exact business logic.",
+    outcomeEn: "A product your customers love, built to scale with your business from day one.",
+    color: "#a855f7",
+  },
+  {
+    icon: "🧠",
+    title: "AI Sales & Marketing Agent",
+    titleEn: "AI Agents (Marketing, Sales, Ops)",
+    problem: "Aapki team outreach, follow-up, aur reporting mein ghante lagaati hai — high-value kaam ke liye time nahi.",
+    solution: "AI agent jo marketing campaigns, sales pipeline, aur operations reports automatically handle kare.",
+    outcome: "Zyada leads, fast deals, aur operations bina constant supervision ke.",
+    problemEn: "Your team spends hours on outreach, follow-ups, and reporting instead of high-value work.",
+    solutionEn: "Autonomous AI agents that handle marketing campaigns, sales pipelines, and ops reporting automatically.",
+    outcomeEn: "Generate more leads, close deals faster, and run operations without constant human oversight.",
+    color: "#f59e0b",
+  },
+  {
+    icon: "🔄",
+    title: "Workflow Automation",
+    titleEn: "Workflow Automation",
+    problem: "Team manually data move karti hai apps ke beech, repetitive emails bhejti hai, spreadsheets mein track karti hai.",
+    solution: "Smart automation jo aapke saare tools ko connect kare aur actions automatically trigger kare.",
+    outcome: "Zero-touch workflows — background mein chalta hai, team important kaam kare.",
+    problemEn: "Your team manually moves data between apps, sends repetitive emails, and tracks tasks in spreadsheets.",
+    solutionEn: "Smart workflow automation that connects every tool in your stack and triggers actions automatically.",
+    outcomeEn: "Zero-touch workflows that run in the background while your team focuses on what matters.",
+    color: "#10b981",
+  },
+];
+
+export const projects = [
+  {
+    title: "AI Lead Generation System",
+    category: "AI Agent",
+    problem: "Ek B2B startup ₹12 lakh/month manual outreach pe kharch kar raha tha — sirf 2% conversion.",
+    solution: "AI agent banaya jo qualified leads dhundhe, GPT-4 se personalized message likhe, aur email + LinkedIn pe auto follow-up kare.",
+    stack: ["Python", "OpenAI API", "n8n", "PostgreSQL", "React"],
+    result: "CAC 70% kam hua, reply rate 18% ho gaya, aur 3x zyada demos per month.",
+    color: "#6c63ff",
+    tag: "Revenue Impact",
+  },
+  {
+    title: "Business Management Platform",
+    category: "Full-Stack App",
+    problem: "Ek logistics company 6 alag tools mein kaam karti thi — data silos aur costly errors.",
+    solution: "Ek unified platform banaya — real-time dashboard, automated invoicing, aur driver tracking sab ek jagah.",
+    stack: ["React", "Python", "FastAPI", "PostgreSQL", "Docker"],
+    result: "3 paid SaaS subscriptions band kiye, billing errors 95% kam, 30 ghante/week admin kaam bachaya.",
+    color: "#00d4ff",
+    tag: "Operational Efficiency",
+  },
+  {
+    title: "E-Commerce Automation Suite",
+    category: "Automation",
+    problem: "Online retailer manually orders process karta tha, inventory update karta tha, emails bhejta tha.",
+    solution: "Poora order lifecycle automate kiya — purchase se fulfillment tak, zero human touch.",
+    stack: ["Python", "Shopify API", "n8n", "SendGrid", "React"],
+    result: "500+ orders/day automatically process, support tickets 60% kam, repeat purchases 40% badhe.",
+    color: "#a855f7",
+    tag: "Scale",
+  },
+  {
+    title: "AI Content Marketing Agent",
+    category: "AI Agent",
+    problem: "Startup founder ke paas LinkedIn, Twitter, aur blog ke liye consistent content ka time nahi tha.",
+    solution: "AI marketing agent banaya jo trends research kare, content draft kare, schedule kare, aur weekly report de.",
+    stack: ["Python", "OpenAI API", "Make.com", "Notion API"],
+    result: "LinkedIn following 200 se 4,800 ho gayi 90 din mein. Founder ka content creation time: 0 ghante.",
+    color: "#f59e0b",
+    tag: "Growth",
+  },
+];
+
+export const skills = {
+  Frontend: [
+    { name: "React.js", level: 92 },
+    { name: "HTML & CSS", level: 95 },
+    { name: "JavaScript", level: 90 },
+    { name: "Tailwind CSS", level: 88 },
+    { name: "Framer Motion", level: 80 },
+  ],
+  Backend: [
+    { name: "Python", level: 90 },
+    { name: "FastAPI", level: 85 },
+    { name: "Java", level: 70 },
+    { name: "REST APIs", level: 88 },
+    { name: "PostgreSQL", level: 82 },
+  ],
+  "AI & Automation": [
+    { name: "OpenAI / LLMs", level: 88 },
+    { name: "AI Agent Design", level: 85 },
+    { name: "n8n / Make.com", level: 90 },
+    { name: "LangChain", level: 78 },
+    { name: "Prompt Engineering", level: 87 },
+  ],
+  Tools: [
+    { name: "Docker", level: 80 },
+    { name: "Git & GitHub", level: 88 },
+    { name: "Figma", level: 75 },
+    { name: "Linux / CLI", level: 82 },
+    { name: "Notion / Airtable", level: 85 },
+  ],
+};
+
+export const process = [
+  {
+    step: "01",
+    title: "Aapka Business Samjho",
+    titleEn: "Understand the Problem",
+    desc: "Pehle main aapka poora business samjhta hoon — kya problem hai, kya goal hai, kahan gap hai. Koi assumption nahi.",
+    descEn: "I start by deeply understanding your business — the bottlenecks, the goals, and the gaps. No assumptions, just clarity.",
+    icon: "🔍",
+  },
+  {
+    step: "02",
+    title: "Solution Design Karo",
+    titleEn: "Design the Solution",
+    desc: "Code likhne se pehle main poora architecture, user flow, aur automation logic map karta hoon.",
+    descEn: "I map out the architecture, user flows, and automation logic before writing a single line of code.",
+    icon: "🎯",
+  },
+  {
+    step: "03",
+    title: "System Banao",
+    titleEn: "Build the System",
+    desc: "Clean code, fast iterations. Aap weekly progress dekhte ho — mahino baad nahi.",
+    descEn: "Clean, modular code. Fast iterations. You see progress weekly, not after months of silence.",
+    icon: "🏗️",
+  },
+  {
+    step: "04",
+    title: "Automate Karo",
+    titleEn: "Automate Workflows",
+    desc: "Har repetitive kaam automate hota hai. Har manual step khatam hota hai. System khud chalta hai.",
+    descEn: "Every repetitive task gets automated. Every manual step gets eliminated. The system runs itself.",
+    icon: "⚡",
+  },
+  {
+    step: "05",
+    title: "Business Scale Karo",
+    titleEn: "Scale the Business",
+    desc: "Sahi systems ke saath growth predictable ho jaati hai. Hum milke optimize, iterate, aur scale karte hain.",
+    descEn: "With the right systems in place, growth becomes predictable. We optimize, iterate, and scale together.",
+    icon: "🚀",
+  },
+];
+
+export const testimonials = [
+  {
+    name: "Ramesh Agarwal",
+    role: "Owner, Agarwal Traders, Jaipur",
+    avatar: "RA",
+    text: "Rajat ne sirf app nahi banaya — poora system banaya. Hamari team ab 25 ghante/week bachati hai aur revenue 3x ho gaya bina extra staff ke.",
+    color: "#6c63ff",
+  },
+  {
+    name: "Sunil Mehta",
+    role: "Founder, Mehta Logistics, Mumbai",
+    avatar: "SM",
+    text: "Sales team ke liye jo AI agent banaya usne sab badal diya. Prospecting, follow-up, reporting — sab automatic. Close rate 40% badh gaya 60 din mein.",
+    color: "#f59e0b",
+  },
+  {
+    name: "Priya Sharma",
+    role: "COO, RetailFlow, Delhi",
+    avatar: "PS",
+    text: "4 alag SaaS tools ki jagah ek custom platform. Exactly jo chahiye tha, kuch extra nahi. Sabse accha investment tha.",
+    color: "#10b981",
+  },
+];
+
+// Indian business types for "Kaun Use Kar Sakta Hai" section
+export const businessTypes = [
+  { icon: "🍬", label: "Mithai / Bakery Shop", benefit: "Orders, stock, aur delivery track karo" },
+  { icon: "🛒", label: "Kirana / Grocery Store", benefit: "Inventory aur billing ek jagah" },
+  { icon: "🍽️", label: "Restaurant / Dhaba", benefit: "Table booking, orders, aur staff manage karo" },
+  { icon: "💇", label: "Salon / Beauty Parlour", benefit: "Appointments aur customer records" },
+  { icon: "🏥", label: "Clinic / Medical Store", benefit: "Patient records aur stock management" },
+  { icon: "🏗️", label: "Construction / Contractor", benefit: "Projects, payments, aur workers track karo" },
+  { icon: "📦", label: "Wholesale / Distribution", benefit: "Orders, invoices, aur delivery automate karo" },
+  { icon: "🎓", label: "Coaching / Institute", benefit: "Students, fees, aur attendance manage karo" },
+];

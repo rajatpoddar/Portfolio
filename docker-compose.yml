@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Pass Supabase env vars at build time so Vite can embed them
+        - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+        - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+    image: rajat-portfolio:latest
+    container_name: rajat-portfolio
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  # Optional: run with a local dev server instead of nginx
+  # portfolio-dev:
+  #   build:
+  #     context: .
+  #     target: builder
+  #   command: npm run dev -- --host
+  #   ports:
+  #     - "5173:5173"
+  #   volumes:
+  #     - .:/app
+  #     - /app/node_modules
+  #   env_file:
+  #     - .env

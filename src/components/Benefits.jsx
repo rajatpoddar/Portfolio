@@ -30,10 +30,10 @@ export default function Benefits() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -5 }}
-              className="glass rounded-2xl p-6 border border-white/5 hover:border-[#10b981]/25 transition-all duration-300">
+              className="t-card rounded-2xl p-6 hover:border-[#10b981]/25 transition-all duration-300">
               <div className="text-3xl mb-4">{b.icon}</div>
-              <h3 className="font-bold text-base mb-2">{b.title}</h3>
-              <p className="text-sm text-white/50 leading-relaxed">{b.desc}</p>
+              <h3 className="font-bold text-base mb-2" style={{ color: 'var(--text)' }}>{b.title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>{b.desc}</p>
             </motion.div>
           ))}
         </div>

@@ -24,7 +24,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050508] flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'var(--bg)' }}>
       {/* Background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full"
@@ -42,37 +42,27 @@ export default function Login() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="text-3xl font-black gradient-text mb-2">RP.</div>
-          <div className="text-sm text-white/40">Admin Dashboard</div>
+          <div className="text-sm" style={{ color: 'var(--text-muted)' }}>Admin Dashboard</div>
         </div>
 
-        <div className="glass rounded-2xl p-8 border border-white/10">
-          <h1 className="text-xl font-bold mb-1">Welcome back</h1>
-          <p className="text-sm text-white/40 mb-6">Sign in to access your business OS</p>
+        <div className="t-card rounded-2xl p-8">
+          <h1 className="text-xl font-bold mb-1" style={{ color: 'var(--text)' }}>Welcome back</h1>
+          <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>Sign in to access your business OS</p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <label className="text-xs text-white/40 font-medium uppercase tracking-wider">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="solutionspoddar@gmail.com"
-                required
-                autoComplete="email"
-                className="bg-white/[0.04] border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#6c63ff]/50 transition-colors"
-              />
+              <label className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Email</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                placeholder="solutionspoddar@gmail.com" required autoComplete="email"
+                className="rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors"
+                style={{ background: 'var(--input-bg)', border: '1px solid var(--border)', color: 'var(--text)' }} />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-xs text-white/40 font-medium uppercase tracking-wider">Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                autoComplete="current-password"
-                className="bg-white/[0.04] border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#6c63ff]/50 transition-colors"
-              />
+              <label className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>Password</label>
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••" required autoComplete="current-password"
+                className="rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors"
+                style={{ background: 'var(--input-bg)', border: '1px solid var(--border)', color: 'var(--text)' }} />
             </div>
 
             {error && (
@@ -107,7 +97,7 @@ export default function Login() {
         </div>
 
         <div className="text-center mt-6">
-          <a href="/" className="text-xs text-white/25 hover:text-white/50 transition-colors">
+          <a href="/" className="text-xs transition-colors" style={{ color: 'var(--text-muted)' }}>
             ← Back to portfolio
           </a>
         </div>

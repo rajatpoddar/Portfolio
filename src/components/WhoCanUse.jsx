@@ -24,7 +24,7 @@ export default function WhoCanUse() {
             {t('who_h1')}<br />
             <span className="gradient-text">{t('who_h2')}</span>
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto">{t('who_sub')}</p>
+          <p style={{ color: 'var(--text-muted)' }} className="max-w-xl mx-auto">{t('who_sub')}</p>
         </motion.div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
@@ -34,10 +34,10 @@ export default function WhoCanUse() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
               whileHover={{ y: -4, scale: 1.02 }}
-              className="group glass rounded-2xl p-5 border border-white/5 hover:border-[#f59e0b]/25 transition-all duration-300 text-center cursor-default">
+              className="group t-card rounded-2xl p-5 hover:border-[#f59e0b]/30 transition-all duration-300 text-center cursor-default">
               <div className="text-3xl mb-3">{biz.icon}</div>
-              <div className="font-semibold text-sm text-white/80 mb-1.5">{biz.label}</div>
-              <div className="text-xs text-white/40 leading-relaxed">{biz.benefit}</div>
+              <div className="font-semibold text-sm mb-1.5" style={{ color: 'var(--text)' }}>{biz.label}</div>
+              <div className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>{biz.benefit}</div>
             </motion.div>
           ))}
         </div>
@@ -45,14 +45,14 @@ export default function WhoCanUse() {
         {/* Trust strip */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 glass rounded-2xl p-5 border border-white/5 grid grid-cols-2 md:flex md:flex-wrap gap-4 md:gap-6 justify-center items-center">
+          className="mt-10 t-card rounded-2xl p-5 grid grid-cols-2 md:flex md:flex-wrap gap-4 md:gap-6 justify-center items-center">
           {[
             { icon: '✅', text: 'Technical knowledge ki zaroorat nahi' },
             { icon: '⚡', text: '500+ ghante ka kaam bachaya' },
             { icon: '🇮🇳', text: 'Indian businesses ke liye banaya' },
             { icon: '💬', text: 'Hindi mein support milega' },
           ].map(({ icon, text }) => (
-            <div key={text} className="flex items-center gap-2 text-sm text-white/60">
+            <div key={text} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-mid)' }}>
               <span>{icon}</span> {text}
             </div>
           ))}
